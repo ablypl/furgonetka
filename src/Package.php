@@ -53,7 +53,7 @@ class Package
     {
         $this->receiver = $user;
 
-        $this->query += $this->getDataFromModel($user, 'receiver');
+        $this->query += $this->getDataFromModel($user);
 
         return $this;
     }
@@ -160,17 +160,15 @@ class Package
      * @param $prefix
      * @return array
      */
-    public function getDataFromModel($model, $prefix)
+    public function getDataFromModel($model, $prefix = "receiver")
     {
-        return [
-            $prefix . '_email' =>  $model->email,
-            $prefix . '_street' =>  $model->street,
-            $prefix . '_city' =>  $model->city,
-            $prefix . '_postcode' =>  $model->postal,
-            $prefix . '_name' =>  $model->name,
-            $prefix . '_surname' =>  $model->surname,
-            $prefix . '_phone' =>  '605850745',
-        ];
+        $array = [];
+        // attributes to add 
+        $atts = ['company', 'email', 'name', 'surname', 'city', 'street', 'postcode', 'phone'];
+        foreach ($atts as $attribute) {
+            $array["{$prefix}_{$attribute}"] = $model->{$attribute};
+        }
+        return $array;
     }
 
     /**
@@ -182,6 +180,23 @@ class Package
         $this->query['type'] = $type;
     }
 
+    /**
+     * Add default sender parameters
+     */
+    public function setDefaultSender()
+    {
+        // query user data
+        // and flatten the collection
+        $sender = $this->client->get('getUserInfo')->flatMap(function($item){
+            return collect($item);
+        });
+        // attributes to add
+        $atts = ['company', 'name', 'surname', 'email', 'phone', 'postcode', 'city', 'street', 'phone'];
+
+        foreach($atts as $attribute) {
+            $this->addParameter("sender_{$attribute}", $sender->get($attribute));
+        }
+    }
 
     /**
      * Check if sender and receiver were provided
@@ -189,7 +204,7 @@ class Package
      */
     protected function checkSenderAndReceiver()
     {
-        if (!$this->sender) throw new \Exception('Należy poprawnie zdefiniować nadawcę');
+        if (!$this->sender) $this->setDefaultSender();
         if (!$this->receiver) throw new \Exception('Należy poprawnie zdefiniować odbiorcę');
     }
 
