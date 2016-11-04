@@ -25,7 +25,7 @@ use Lari\Furgonetka\Client as Furgonetka;
     ->addParameter('sender_paczkomat', 'XXXX')
     ->addParameter('receiver_paczkomat', 'XXXX')
     ->add('inpost');
-    ```
+```
 
 ### Methods
 ##### User // (new Furgonetka())->user()
