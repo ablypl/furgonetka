@@ -5,7 +5,6 @@ namespace Lari\Furgonetka;
 class Client
 {
     protected $url = 'http://furgonetka.pl/api/';
-//    protected $url = 'http://test.furgonetka.pl/api/';
 
     protected $client;
     
