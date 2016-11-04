@@ -11,5 +11,10 @@
             "name": "Sebastian Szczepański",
             "email": "sebastian@ably.pl"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "Lari\\Furgonetka\\": "src/"
+        }
+    }
 }
