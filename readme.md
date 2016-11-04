@@ -60,12 +60,5 @@ Want to contribute? Great!
 Contact me at sebastian@ably.pl
 
 ### License
-
-
 MIT
 
-
-    ```
-```
-```
-```
