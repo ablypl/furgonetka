@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Lari\Furgonetka;
 
 /**
@@ -33,7 +32,7 @@ class Paczkomaty
      * @param string $postcode
      * @return Paczkomaty $this
      */
-    public function setPostcode($postcode)
+    public function setPostcode($postcode): Paczkomaty
     {
         $this->setQueryKey('postcode', $postcode);
 
@@ -44,7 +43,7 @@ class Paczkomaty
      * @param string $city
      * @return Paczkomaty $this
      */
-    public function setCity(string $city)
+    public function setCity(string $city): Paczkomaty
     {
         $this->setQueryKey('city', $city);
 
@@ -55,7 +54,7 @@ class Paczkomaty
      * @param string $street
      * @return Paczkomaty $this
      */
-    public function setStreet($street)
+    public function setStreet(string $street): Paczkomaty
     {
         $this->setQueryKey('street', $street);
 
@@ -75,10 +74,10 @@ class Paczkomaty
     }
 
     /**
-     * @param User
-     * @return $this
+     * @param object
+     * @return Paczkomaty $this
      */
-    public function setUser($user)
+    public function setUser($user): Paczkomaty
     {
         $this->query = [
             'postcode' => $user->postal,
