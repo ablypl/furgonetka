@@ -69,9 +69,7 @@ class Paczkomaty
      */
     private function setQueryKey($key, $value): Paczkomaty
     {
-        $this->query = [
-            $key => $value,
-        ];
+        $this->query[$key] = $value;
 
         return $this;
     }
